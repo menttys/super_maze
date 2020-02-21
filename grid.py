@@ -6,6 +6,7 @@ class Grid:
         self.columns = columns
         self.grid = self.prepareGrid()
         self.configureCels()
+        self.toString()
     
     def prepareGrid(self):
         newGrid = []
@@ -48,8 +49,28 @@ class Grid:
         self.rows * self.columns
 
 
-    def printResult(self):
-        print(self.grid)
+    def toString(self):
+        
+        output = "+" + "---+" * self.columns + "\n"
+        
+        for row in self.eachRow():
+            output += "" 
+            top = "|"
+            bottom = "+"
+            for cell in row:
+                body = "   " # 3 spaces
+                east_boundary = " " if cell.linkedTo('east')==True else "|"
+                # top += body + east_boundary
+                # south_boundary = "   " if cell.linked_to(cell.south) else "---"
+                # east_boundary = "|"
+                top += body + east_boundary
+                south_boundary = "---"
+                corner = "+"
+                bottom += south_boundary + corner
+            output += top + "\n"
+            output += bottom + "\n"
+
+        print(output)
 
         
 # myObj = Grid(4, 4)

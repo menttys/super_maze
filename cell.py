@@ -21,8 +21,14 @@ class Cell:
             self.unlink(cell, False)
 
 
-    def linkedTo(self):
-        return self.links
+    def linkedTo(self, side):
+        
+        if side == 'east':
+            if self.east[1] < 4 : 
+                print(self.east)
+                return True
+        
+        return False
         
 
     def links(self):
