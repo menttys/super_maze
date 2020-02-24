@@ -7,14 +7,20 @@ import random
 def render(grid):
     for cell in grid.eachCell():
         neighbors = []
-        if cell.north:
-            neighbors.append(cell.north)
+        
+        if cell.south:
+            # neighbors.append(cell.north)
+            neighbors.append('south')
         if cell.east:
-            neighbors.append(cell.east)
+            # neighbors.append(cell.east)
+            neighbors.append('east')
+        
         if len(neighbors) > 0:
             neighbor = random.choice(neighbors)
-            neighbor.append(cell)
+            if neighbor:
+                cell.link(neighbor)  
 
+    grid.toString()
 
 render(Grid(4,4))
 

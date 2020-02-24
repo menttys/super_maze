@@ -2,7 +2,12 @@ class Cell:
     def __init__(self, row, column):
         self.row = row
         self.column = column
-        self.links = {}
+        self.links = {
+            'north': False,
+            'south': False,
+            'east': False,
+            'west': False
+        }
         self.north: None
         self.south: None
         self.east: None
@@ -22,11 +27,8 @@ class Cell:
 
 
     def linkedTo(self, side):
-        
-        if side == 'east':
-            if self.east[1] < 4 : 
-                print(self.east)
-                return True
+        if self.links[side] and self.east[1] < 4:
+            return True
         
         return False
         
@@ -46,4 +48,4 @@ class Cell:
         if self.west:
             neighborsList.append("west")
         
-        return neighborsList
+        self.links = neighborsList
