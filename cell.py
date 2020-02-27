@@ -27,7 +27,7 @@ class Cell:
 
 
     def linkedTo(self, side):
-        if self.links[side] and self.east[1] < 4:
+        if self.links[side]:
             return True
         
         return False
@@ -36,7 +36,8 @@ class Cell:
     def links(self):
         return self.links
 
-    
+
+    # not in use.
     def neighbors(self):
         neighborsList = []
         if self.north:
@@ -48,4 +49,4 @@ class Cell:
         if self.west:
             neighborsList.append("west")
         
-        self.links = neighborsList
+        return neighborsList

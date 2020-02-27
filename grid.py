@@ -1,4 +1,5 @@
 from cell import Cell
+from draw import Draw
 
 class Grid: 
     def __init__(self, rows:int, columns:int):
@@ -32,10 +33,16 @@ class Grid:
         for cell in self.eachCell():
             row = cell.row
             col = cell.column
-            cell.north = [row - 1, col]
-            cell.south = [row + 1, col]
-            cell.west  = [row, col - 1]
-            cell.east  = [row, col + 1]
+            cell.north = self.isBoundary(row - 1, col) 
+            cell.south = self.isBoundary(row + 1, col)
+            cell.west  = self.isBoundary(row, col - 1)
+            cell.east  = self.isBoundary(row, col + 1)
+
+
+    def isBoundary(self, row, column):
+        if ((row >= 0 and row < self.rows) and (column >= 0 and column < self.columns)):
+            return [row, column]
+            
 
 
     def randomCell(self):
@@ -58,13 +65,43 @@ class Grid:
             bottom = "+"
             for cell in row:
                 body = "   " # 3 spaces
-                east_boundary = " " if cell.linkedTo('east')==True else "|"
+                east_boundary = " " if cell.linkedTo('east')  else "|"
                 south_boundary = "   " if cell.linkedTo('south') else "---"
                 top += body + east_boundary
-                # south_boundary = "---"
                 corner = "+"
                 bottom += south_boundary + corner
             output += top + "\n"
             output += bottom + "\n"
 
         print(output)
+    
+    def toDrawing(self):
+        cellSize = 30
+        fullSizeWidth = cellSize * self.columns
+        fullSizeHeight = cellSize * self.rows
+        
+        
+        d = Draw(fullSizeWidth, fullSizeHeight)
+        # draw the north wall with the exit on the first cell
+        d.drawLine(cellSize,0,fullSizeWidth,0)
+        # draw the west wall
+        d.drawLine(0,0,0,fullSizeHeight)
+
+        for row in self.eachRow():
+            for cell in row:
+
+                X = cell.column * cellSize
+                Y = cell.row * cellSize
+                XV = X + cellSize
+                YV = Y + cellSize 
+                
+                # horizontal
+                # d.drawLine(X, YV, XV, YV)
+                # vertical
+                # d.drawLine(XV, Y, XV, YV)
+                if not cell.linkedTo('east'):
+                    d.drawLine(XV, Y, XV, YV)
+                if not cell.linkedTo('south') and not (cell.south==None and cell.column==0):
+                    d.drawLine(X, YV, XV, YV)
+        
+        d.closeWin()
