@@ -27,8 +27,13 @@ class Draw:
     SY = SPACING['top'] + sy
 
     L = Line(Point(FX , FY), Point(SX, SY))
-    L.setWidth(3)
+    L.setWidth(2)
     L.draw(self.win)
+
+    # L2 = Line(Point(FX , FY), Point(SX, SY))
+    # L2.setWidth(2)
+    # l2.
+    # L2.draw(self.win)
 
   def closeWin(self):
     self.win.getMouse() 

@@ -56,8 +56,8 @@ class Grid:
 
 
     def toString(self):
-        
-        output = "+" + "---+" * self.columns + "\n"
+        # output = "+" + "---+" * self.columns + "\n"
+        output = "+   +" + "---+" * (self.columns - 1) + "\n"
         
         for row in self.eachRow():
             output += "" 
@@ -76,10 +76,9 @@ class Grid:
         print(output)
     
     def toDrawing(self):
-        cellSize = 30
+        cellSize = 8
         fullSizeWidth = cellSize * self.columns
         fullSizeHeight = cellSize * self.rows
-        
         
         d = Draw(fullSizeWidth, fullSizeHeight)
         # draw the north wall with the exit on the first cell
