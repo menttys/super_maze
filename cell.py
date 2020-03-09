@@ -1,3 +1,5 @@
+from distances import Distances
+
 class Cell:
     def __init__(self, row, column):
         self.row = row
@@ -37,16 +39,32 @@ class Cell:
         return self.links
 
 
-    # not in use.
     def neighbors(self):
         neighborsList = []
-        if self.north:
-            neighborsList.append("north")
-        if self.south:
-            neighborsList.append("south")
-        if self.east:
-            neighborsList.append("east")
-        if self.west:
-            neighborsList.append("west")
+
+        if self.links['north']:
+            neighborsList.append(self.north)
+        if self.links['south']:
+            neighborsList.append(self.south)
+        if self.links['east']:
+            neighborsList.append(self.east)
+        if self.links['west']:
+            neighborsList.append(self.west)
         
         return neighborsList
+
+
+    def distances(self):
+        distancesList = Distances(self)
+        frontier = [self]
+        
+        # i = 0
+        # while i < len(frontier):
+        #     for cell in frontier:
+        #         for neighbor in cell.neighbors():
+        #             distancesList[neighbor] = distancesList[cell]
+        #             new_frontier.append(neighbor)
+        #     frontier = new_frontier
+        #     i+=1
+
+        return distancesList

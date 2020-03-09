@@ -55,7 +55,18 @@ class Grid:
         self.rows * self.columns
 
 
+    def contents_of(self, cell):
+        print(cell.distances())
+        return " 1 "
+        # if distances and distances[cell]:
+        #     distances[cell].toString(36)
+
+
     def toString(self):
+        
+        # def contents_of(cell):
+        #     return "   " # 3 spaces
+
         # output = "+" + "---+" * self.columns + "\n"
         output = "+   +" + "---+" * (self.columns - 1) + "\n"
         
@@ -64,7 +75,7 @@ class Grid:
             top = "|"
             bottom = "+"
             for cell in row:
-                body = "   " # 3 spaces
+                body = self.contents_of(cell) 
                 east_boundary = " " if cell.linkedTo('east')  else "|"
                 south_boundary = "   " if cell.linkedTo('south') else "---"
                 top += body + east_boundary
@@ -75,6 +86,7 @@ class Grid:
 
         print(output)
     
+
     def toDrawing(self):
         cellSize = 8
         fullSizeWidth = cellSize * self.columns
