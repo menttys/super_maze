@@ -4,10 +4,10 @@ from cell import Cell
 def BinaryTree(grid):
     for cell in grid.eachCell():
         neighbors = []
-        
-        if cell.south:
+
+        if cell.links['south']['position']:
             neighbors.append('south')
-        if cell.east:
+        if cell.links['east']['position']:
             neighbors.append('east')
         
         if len(neighbors) > 0:

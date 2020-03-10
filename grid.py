@@ -33,10 +33,22 @@ class Grid:
         for cell in self.eachCell():
             row = cell.row
             col = cell.column
-            cell.north = self.isBoundary(row - 1, col) 
-            cell.south = self.isBoundary(row + 1, col)
-            cell.west  = self.isBoundary(row, col - 1)
-            cell.east  = self.isBoundary(row, col + 1)
+
+            if self.isBoundary(row - 1, col):
+                cell.links['north']['position'] = row - 1, col
+                cell.linkTheNeigbors(self.grid[row-1][col], 'north')
+
+            if self.isBoundary(row + 1, col):
+                cell.links['south']['position'] = row + 1, col
+                cell.linkTheNeigbors(self.grid[row+1][col], 'south')
+
+            if self.isBoundary(row, col - 1):
+                cell.links['west']['position'] = row, col - 1
+                cell.linkTheNeigbors(self.grid[row][col - 1], 'west')
+
+            if self.isBoundary(row, col + 1):
+                cell.links['east']['position'] = row, col + 1
+                cell.linkTheNeigbors(self.grid[row][col+1], 'east')
 
 
     def isBoundary(self, row, column):
@@ -56,7 +68,8 @@ class Grid:
 
 
     def contents_of(self, cell):
-        print(cell.distances())
+        cell.distances()
+
         return " 1 "
         # if distances and distances[cell]:
         #     distances[cell].toString(36)
