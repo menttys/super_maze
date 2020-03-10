@@ -13,5 +13,9 @@ class Distances:
     def allDistances(self):
       return self.cells
 
+    def printList(self, cell):
+      print(self.cells[cell])
+
+
   
 

@@ -5,10 +5,10 @@ def BinaryTree(grid):
     for cell in grid.eachCell():
         neighbors = []
 
-        if cell.links['south']['position']:
-            neighbors.append('south')
-        if cell.links['east']['position']:
-            neighbors.append('east')
+        if cell.south:
+            neighbors.append(cell.south)
+        if cell.east:
+            neighbors.append(cell.east)
         
         if len(neighbors) > 0:
             neighbor = random.choice(neighbors)

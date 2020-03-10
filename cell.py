@@ -4,19 +4,16 @@ class Cell:
     def __init__(self, row, column):
         self.row = row
         self.column = column
-        self.links = {
-            'north': { 'hasNeighbor': False, 'cellRef': None, 'position': None },
-            'south': { 'hasNeighbor': False, 'cellRef': None, 'position': None },
-            'east':  { 'hasNeighbor': False, 'cellRef': None, 'position': None },
-            'west':  { 'hasNeighbor': False, 'cellRef': None, 'position': None }
-        }
-    
+        self.links = []
+        self.north = None
+        self.south = None
+        self.east = None
+        self.west = None    
 
-    def link(self, side, bidi=True):
-        self.links[side]['hasNeighbor'] = True
-        # neighborCell = self.links[side]['cellRef']
-        # if bidi:
-        #     self.link(neighborCell, False) 
+    def link(self, cell, bidi=True):
+        self.links.append(cell)
+        if bidi:
+            cell.link(self, False) 
 
 
     def unlink(self, cell, bidi=True):
@@ -24,14 +21,9 @@ class Cell:
         if bidi:
             self.unlink(cell, False)
 
-
-    def linkTheNeigbors(self, cell, side):
-        # print(self.links[side])
-        self.links[side]['cellRef'] = cell
-
         
-    def linkedTo(self, side):
-        if self.links[side]['hasNeighbor']:
+    def linkedTo(self, cell):
+        if cell in self.links:
             return True
         
         return False
@@ -39,26 +31,22 @@ class Cell:
 
     def links(self):
         return self.links
-
-
-    # def findNeighbour(self):
     
 
     def neighbors(self):
         neighborsList = []
 
-        if self.links['north']['hasNeighbor']:
-            neighborsList.append(self.links['north']['cellRef'])
+        if self.north:
+            neighborsList.append(self.north)
 
-        if self.links['south']['hasNeighbor']:
-            neighborsList.append(self.links['south']['cellRef'])
+        if self.south:
+            neighborsList.append(self.south)
 
-        if self.links['east']['hasNeighbor']:
-            neighborsList.append(self.links['east']['cellRef'])
+        if self.east:
+            neighborsList.append(self.east)
 
-        if self.links['west']['hasNeighbor']:
-            neighborsList.append(self.links['west']['cellRef'])
-        
+        if self.west:
+            neighborsList.append(self.west)
 
         return neighborsList
 
@@ -67,14 +55,16 @@ class Cell:
         distancesList = Distances(self)
         frontier = [self]
 
+        print("-=-=-=-=-=-=-=-=-=-=-=-=-")
         i = 0
-        # while i < len(frontier):
-        #     for cell in frontier:
-        #         for neighbor in cell.neighbors():
-        #             print(neighbor)
+        while i < len(frontier):
+            for cell in frontier:
+                print(cell.links)
+                for neighbor in cell.links:
+                    print(distancesList.printList(cell))
                     # distancesList[neighbor] = distancesList[cell]
         #             new_frontier.append(neighbor)
         #     frontier = new_frontier
-        #     i+=1
+            i+=1
 
         return distancesList

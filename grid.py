@@ -1,5 +1,6 @@
 from cell import Cell
 from draw import Draw
+from distances import Distances
 
 class Grid: 
     def __init__(self, rows:int, columns:int):
@@ -7,6 +8,7 @@ class Grid:
         self.columns = columns
         self.grid = self.prepareGrid()
         self.configureCels()
+        self.distance = None
     
     def prepareGrid(self):
         newGrid = []
@@ -29,33 +31,25 @@ class Grid:
                 yield cell   
 
 
+    def fetchCell(self, row, column):
+        return self.grid[0][0]
+
     def configureCels(self):
         for cell in self.eachCell():
             row = cell.row
             col = cell.column
 
-            if self.isBoundary(row - 1, col):
-                cell.links['north']['position'] = row - 1, col
-                cell.linkTheNeigbors(self.grid[row-1][col], 'north')
-
-            if self.isBoundary(row + 1, col):
-                cell.links['south']['position'] = row + 1, col
-                cell.linkTheNeigbors(self.grid[row+1][col], 'south')
-
-            if self.isBoundary(row, col - 1):
-                cell.links['west']['position'] = row, col - 1
-                cell.linkTheNeigbors(self.grid[row][col - 1], 'west')
-
-            if self.isBoundary(row, col + 1):
-                cell.links['east']['position'] = row, col + 1
-                cell.linkTheNeigbors(self.grid[row][col+1], 'east')
+            cell.north = self.isBoundary(row - 1, col)
+            cell.south = self.isBoundary(row + 1, col)
+            cell.west  = self.isBoundary(row, col - 1)
+            cell.east  = self.isBoundary(row, col + 1)
 
 
     def isBoundary(self, row, column):
         if ((row >= 0 and row < self.rows) and (column >= 0 and column < self.columns)):
-            return [row, column]
+            return self.grid[row][column]
+        return None
             
-
 
     def randomCell(self):
         row = randint(0, self.rows)
@@ -68,11 +62,9 @@ class Grid:
 
 
     def contents_of(self, cell):
-        cell.distances()
-
-        return " 1 "
+        return "   " 
         # if distances and distances[cell]:
-        #     distances[cell].toString(36)
+        #     return hex(distances[cell])
 
 
     def toString(self):
@@ -89,8 +81,8 @@ class Grid:
             bottom = "+"
             for cell in row:
                 body = self.contents_of(cell) 
-                east_boundary = " " if cell.linkedTo('east')  else "|"
-                south_boundary = "   " if cell.linkedTo('south') else "---"
+                east_boundary = " "    if cell.linkedTo(cell.east)  else "|"
+                south_boundary = "   " if cell.linkedTo(cell.south) else "---"
                 top += body + east_boundary
                 corner = "+"
                 bottom += south_boundary + corner
