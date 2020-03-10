@@ -10,7 +10,7 @@ class Cell:
             'east':  { 'hasNeighbor': False, 'cellRef': None, 'position': None },
             'west':  { 'hasNeighbor': False, 'cellRef': None, 'position': None }
         }
-    
+
 
     def link(self, side, bidi=True):
         self.links[side]['hasNeighbor'] = True
