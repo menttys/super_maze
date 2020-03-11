@@ -61,9 +61,21 @@ class Grid:
         self.rows * self.columns
 
 
+    #  convert INT to string base 36
+    def parseNumberHex(self, n):
+        retStr = str(n).replace('0x', '')
+        if len(retStr) == 1:
+            revisedStr = retStr.rjust(len(retStr) + 1)
+            return revisedStr.ljust(len(revisedStr) + 1)
+        if len(retStr) == 2:
+            return retStr.rjust(len(retStr)+1)
+        
+        return retStr
+
+
     def contents_of(self, cell):
         if cell in self.distances.cells:
-            return str(" {} ".format(self.distances.cells[cell]))
+            return self.parseNumberHex(hex(self.distances.cells[cell]))
             
         return "   " 
 

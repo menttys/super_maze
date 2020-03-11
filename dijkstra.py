@@ -1,7 +1,12 @@
-from grid import Grid 
-from binary_tree import BinaryTree 
+import random 
+import sys
+from grid import Grid
+from binary_tree import BinaryTree
 
-grid = Grid(5, 5)
+ROW = int(sys.argv[1])
+COL = int(sys.argv[2])
+
+grid = Grid(ROW, COL)
 BinaryTree(grid)
 
 # startig at the cell [0,0]
