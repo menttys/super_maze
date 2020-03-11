@@ -52,19 +52,21 @@ class Cell:
 
 
     def distances(self):
-        distancesList = Distances(self)
+        distance = Distances(self)
         frontier = [self]
 
-        print("-=-=-=-=-=-=-=-=-=-=-=-=-")
         i = 0
-        while i < len(frontier):
-            for cell in frontier:
-                print(cell.links)
-                for neighbor in cell.links:
-                    print(distancesList.printList(cell))
-                    # distancesList[neighbor] = distancesList[cell]
-        #             new_frontier.append(neighbor)
-        #     frontier = new_frontier
-            i+=1
+        while frontier:
+            new_frontier = []
 
-        return distancesList
+            for cell in frontier:
+                for neighbor in cell.links:
+                    if distance.cells[cell]:
+                        continue
+                    
+                    # add a neighbor distance of the actuall cell + 1
+                    distance.addDistanceCell(neighbor, distance.cells[cell] + 1 )
+                    new_frontier.append(neighbor)
+            frontier = new_frontier
+
+        return distance

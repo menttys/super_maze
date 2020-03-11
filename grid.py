@@ -8,7 +8,7 @@ class Grid:
         self.columns = columns
         self.grid = self.prepareGrid()
         self.configureCels()
-        self.distance = None
+        self.distances = None
     
     def prepareGrid(self):
         newGrid = []
@@ -62,16 +62,14 @@ class Grid:
 
 
     def contents_of(self, cell):
+        if cell in self.distances.cells:
+            return str(" {} ".format(self.distances.cells[cell]))
+            
         return "   " 
-        # if distances and distances[cell]:
-        #     return hex(distances[cell])
 
 
     def toString(self):
         
-        # def contents_of(cell):
-        #     return "   " # 3 spaces
-
         # output = "+" + "---+" * self.columns + "\n"
         output = "+   +" + "---+" * (self.columns - 1) + "\n"
         
