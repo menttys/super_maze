@@ -1,7 +1,7 @@
 from grid import Grid 
 from binary_tree import BinaryTree 
 
-grid = Grid(5, 5)
+grid = Grid(20, 10)
 BinaryTree(grid)
 
 # startig at the cell [0,0]
