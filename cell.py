@@ -58,10 +58,10 @@ class Cell:
         i = 0
         while frontier:
             new_frontier = []
-
+            
             for cell in frontier:
                 for neighbor in cell.links:
-                    if distance.cells[cell]:
+                    if neighbor in distance.cells:
                         continue
                     
                     # add a neighbor distance of the actuall cell + 1

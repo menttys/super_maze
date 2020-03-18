@@ -5,17 +5,22 @@ class Distances:
         self.cells[self.root] = 0
 
     def fetchDistanceCell(self, cell):
-      return self.cells[cell]
-    
+        return self.cells[cell]
+
     def addDistanceCell(self, cell, distance):
-      self.cells[cell] = distance
+        self.cells[cell] = distance
 
     def allDistances(self):
-      return self.cells
+        return self.cells
 
     def printList(self, cell):
-      print(self.cells[cell])
+        print(self.cells[cell])
 
+    def pathTo(goal):
+        current = goal
+        
+        breadcrumbs = Distances(self.root)
+        breadcrumbs.addDistanceCell(current, this.cells[current])
 
-  
+        
 

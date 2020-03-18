@@ -1,12 +1,16 @@
-from grid import Grid 
-from binary_tree import BinaryTree 
+import random 
+import sys
+from grid import Grid
+from distance_grid import DistanceGrid
+from binary_tree import BinaryTree
 
-grid = Grid(20, 10)
-BinaryTree(grid)
+def dijkstra(ROW, COL):
+    distanceGrid = DistanceGrid(ROW, COL)
+    BinaryTree(distanceGrid)
 
-# startig at the cell [0,0]
-startCell = grid.fetchCell(0,0)
-distances = startCell.distances()
-grid.distances = distances
+    # startig at the cell [0,0]
+    startCell = distanceGrid.fetchCell(0,0)
+    distances = startCell.distances()
+    distanceGrid.distances = distances
 
-grid.toString()
+    distanceGrid.toString()

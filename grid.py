@@ -61,16 +61,24 @@ class Grid:
         self.rows * self.columns
 
 
+    #  convert INT to string base 36
+    def parseNumberHex(self, n):
+        retStr = str(n).replace('0x', '')
+        if len(retStr) == 1:
+            revisedStr = retStr.rjust(len(retStr) + 1)
+            return revisedStr.ljust(len(revisedStr) + 1)
+        if len(retStr) == 2:
+            return retStr.rjust(len(retStr)+1)
+        
+        return retStr
+
+
     def contents_of(self, cell):
-        if cell in self.distances.cells:
-            return str(" {} ".format(self.distances.cells[cell]))
-            
         return "   " 
 
 
     def toString(self):
         
-        # output = "+" + "---+" * self.columns + "\n"
         output = "+   +" + "---+" * (self.columns - 1) + "\n"
         
         for row in self.eachRow():
@@ -91,7 +99,7 @@ class Grid:
     
 
     def toDrawing(self):
-        cellSize = 8
+        cellSize = 35
         fullSizeWidth = cellSize * self.columns
         fullSizeHeight = cellSize * self.rows
         
@@ -113,9 +121,9 @@ class Grid:
                 # d.drawLine(X, YV, XV, YV)
                 # vertical
                 # d.drawLine(XV, Y, XV, YV)
-                if not cell.linkedTo('east'):
+                if not cell.linkedTo(cell.east):
                     d.drawLine(XV, Y, XV, YV)
-                if not cell.linkedTo('south') and not (cell.south==None and cell.column==0):
+                if not cell.linkedTo(cell.south) and not (cell.south==None and cell.column==0):
                     d.drawLine(X, YV, XV, YV)
         
         d.closeWin()
