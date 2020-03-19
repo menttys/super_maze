@@ -16,11 +16,17 @@ class Distances:
     def printList(self, cell):
         print(self.cells[cell])
 
-    def pathTo(goal):
+    def pathTo(self, goal):
         current = goal
         
         breadcrumbs = Distances(self.root)
-        breadcrumbs.addDistanceCell(current, this.cells[current])
+        breadcrumbs.addDistanceCell(current, self.cells[current])
 
+        while current == self.root:
+            for neighbor in current.links:
+                if self.cells[neighbor] < self.cells[current]:
+                    breadcrumbs.addDistanceCell(neighbor, self.cells[neighbor])
+                    current = neighbor
+                    break
         
 

@@ -20,7 +20,7 @@ def render(grid):
     grid.toDrawing()
 
 
-if STL == 'dijks':
+if STL == 'dijk':
     dijkstra(ROW,COL)
 else:
     render(Grid(ROW,COL))

@@ -14,3 +14,7 @@ def dijkstra(ROW, COL):
     distanceGrid.distances = distances
 
     distanceGrid.toString()
+
+    distanceGrid.distances = distances.pathTo(distanceGrid.fetchCell(distanceGrid.rows - 1,0))
+    distanceGrid.toString()
+    # print()
