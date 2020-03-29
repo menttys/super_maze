@@ -22,18 +22,12 @@ class Distances:
         breadcrumbs = Distances(self.root)
         breadcrumbs.addDistanceCell(current, self.cells[current])
         
-        print(current)
-        print(self.root)
-         
-        while current == self.root:
-            print("_____")
+        while current != self.root:
             for neighbor in current.links:
-                print("_____")
                 if self.cells[neighbor] < self.cells[current]:
-                    print("_____")
                     breadcrumbs.addDistanceCell(neighbor, self.cells[neighbor])
                     current = neighbor
                     continue
         
-        # return breadcrumbs
+        return breadcrumbs
 

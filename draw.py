@@ -30,10 +30,17 @@ class Draw:
     L.setWidth(2)
     L.draw(self.win)
 
-    # L2 = Line(Point(FX , FY), Point(SX, SY))
-    # L2.setWidth(2)
-    # l2.
-    # L2.draw(self.win)
+  def drawRectangle(self, fx, fy, sx, sy):
+    FX = SPACING['left'] + fx
+    FY = SPACING['top'] + fy
+    SX = SPACING['left'] + sx
+    SY = SPACING['top'] + sy
+
+    poly_points = []
+    Rect = Rectangle(Point(FX , FY), Point(SX, SY))
+    Rect.setFill('#5577FF')
+    Rect.setWidth(0)
+    Rect.draw(self.win)
 
   def closeWin(self):
     self.win.getMouse() 
