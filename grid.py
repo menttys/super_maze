@@ -1,6 +1,5 @@
 from cell import Cell
 from draw import Draw
-from distances import Distances
 
 class Grid: 
     def __init__(self, rows:int, columns:int):
@@ -32,7 +31,7 @@ class Grid:
 
 
     def fetchCell(self, row, column):
-        return self.grid[0][0]
+        return self.grid[row][column]
 
     def configureCels(self):
         for cell in self.eachCell():

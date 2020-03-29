@@ -18,15 +18,22 @@ class Distances:
 
     def pathTo(self, goal):
         current = goal
-        
+
         breadcrumbs = Distances(self.root)
         breadcrumbs.addDistanceCell(current, self.cells[current])
-
+        
+        print(current)
+        print(self.root)
+         
         while current == self.root:
+            print("_____")
             for neighbor in current.links:
+                print("_____")
                 if self.cells[neighbor] < self.cells[current]:
+                    print("_____")
                     breadcrumbs.addDistanceCell(neighbor, self.cells[neighbor])
                     current = neighbor
-                    break
+                    continue
         
+        # return breadcrumbs
 

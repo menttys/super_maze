@@ -13,8 +13,8 @@ def dijkstra(ROW, COL):
     distances = startCell.distances()
     distanceGrid.distances = distances
 
-    distanceGrid.toString()
+    # distanceGrid.toString()
 
+    # print("path from northwest corner to southwest corner")
     distanceGrid.distances = distances.pathTo(distanceGrid.fetchCell(distanceGrid.rows - 1,0))
-    distanceGrid.toString()
-    # print()
+    # distanceGrid.toString()
