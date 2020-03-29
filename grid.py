@@ -84,11 +84,23 @@ class Grid:
             output += bottom + "\n"
         print(output)
 
+    def distance(self, cell):
+        if cell in self.distances.cells:
+            return self.distances.cells[cell]
+
+    def maxDistance(self):
+        return max(self.distances.cells.values())
+
+    def domainRange(self, range, domain):
+        RGBMAX = 255
+        invertPosition = range - domain
+        scalePosition = int((RGBMAX * invertPosition) / range)
+        return scalePosition
+
     def toDrawing(self):
         cellSize = 35
         fullSizeWidth = cellSize * self.columns
         fullSizeHeight = cellSize * self.rows
-
         # instance of Draw 
         d = Draw(fullSizeWidth, fullSizeHeight)
 
@@ -99,12 +111,18 @@ class Grid:
 
         for row in self.eachRow():
             for cell in row:
+                cellDistance = self.distances.fetchDistanceCell(cell)
+                intensity = self.domainRange(self.maxDistance(), cellDistance)
+                dark = 100
+                bright = self.domainRange(self.maxDistance(), cellDistance)
+                color = '#%02x%02x%02x' % (dark, dark, bright)
+
                 X = findX(cell)
                 Y = findY(cell)
                 X2 = X + cellSize
                 Y2 = Y + cellSize 
                 
-                d.drawRectangle(X, Y, X2, Y2)
+                d.drawRectangle(X, Y, X2, Y2, color)
 
         # draw the north wall with the exit on the first cell
         d.drawLine(cellSize,0,fullSizeWidth,0)

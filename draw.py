@@ -27,18 +27,18 @@ class Draw:
     SY = SPACING['top'] + sy
 
     L = Line(Point(FX , FY), Point(SX, SY))
-    L.setWidth(2)
+    L.setWidth(1)
+    L.setOutline('magenta')
     L.draw(self.win)
 
-  def drawRectangle(self, fx, fy, sx, sy):
+  def drawRectangle(self, fx, fy, sx, sy, color):
     FX = SPACING['left'] + fx
     FY = SPACING['top'] + fy
     SX = SPACING['left'] + sx
     SY = SPACING['top'] + sy
-
     poly_points = []
     Rect = Rectangle(Point(FX , FY), Point(SX, SY))
-    Rect.setFill('#5577FF')
+    Rect.setFill(color)
     Rect.setWidth(0)
     Rect.draw(self.win)
 
